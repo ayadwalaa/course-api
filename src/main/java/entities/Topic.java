@@ -1,4 +1,4 @@
-package Topics;
+package entities;
 
 import javax.persistence.Entity;
 // configuring the relations

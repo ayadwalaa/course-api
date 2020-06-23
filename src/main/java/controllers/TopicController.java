@@ -1,8 +1,8 @@
-package Topics;
+package controllers;
 
 // This class is to know what would the URL include, and what will happen when an exact URL is requested
 // Methods implemented in this class, are all about request mapping
-
+import entities.APIErrors;
 import java.util.List;
 import java.util.Optional;
 import java.util.Arrays;
@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import entities.APIErrors;
+import entities.Topic;
+import services.TopicService;
 @RestController
 
 public class TopicController {
@@ -55,7 +59,7 @@ public class TopicController {
 		
 	
 	
-	// If topic doesn't exist
+	// If topic doesn't exist or mistakenly updated
 	@RequestMapping(method=RequestMethod.PUT, value="/topics/{id}")
 	public void updateTopic(@RequestBody Topic topic, @PathVariable String id) throws APIErrors {
 		try{

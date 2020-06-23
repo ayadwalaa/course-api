@@ -1,4 +1,4 @@
-package Topics;
+package entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,7 +38,7 @@ public class APIErrors extends Exception {
 	       this.message = message;
 	       this.debugMessage = ex.getLocalizedMessage();
 	   }
-	   APIErrors(final String message){
+	   public APIErrors(final String message){
 		   super(message);
 	   }
 	

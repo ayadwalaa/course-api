@@ -1,6 +1,8 @@
-package Topics;
+package repositories;
 
 import org.springframework.data.repository.CrudRepository;
+
+import entities.Course;
 
 import java.util.List;
 

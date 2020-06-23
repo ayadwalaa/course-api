@@ -1,8 +1,12 @@
-package Topics;
+package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Course {
@@ -10,20 +14,21 @@ public class Course {
 	
 	// In order to use the course's ID as the primary key in the relational database, we use the primary key as a notation
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id; 
 	private String name;
 	private String description;
 	
 	@ManyToOne
-	private Topic topic;
+	private Topic topics;
 	
 
 	public Topic getTopic() {
-		return topic;
+		return topics;
 	}
 
 	public void setTopic(String id, String string, String string2) {
-		this.topic = new Topic(id, string, string2);
+		this.topics = new Topic(id, string, string2);
 	}
 
 	public Course() {}
@@ -33,7 +38,7 @@ public class Course {
 		this.id = id;
 		this.name = name;
 		this.description = de;
-		this.topic= new Topic(topicId, "","");
+		this.topics= new Topic(topicId, "","");
 	}
 	
 	
