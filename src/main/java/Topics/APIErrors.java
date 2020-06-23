@@ -7,16 +7,17 @@ import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class APIErrors {
+public class APIErrors extends Exception {
 	private HttpStatus status;
 	   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	   private LocalDateTime timestamp;
 	   private String message;
 	   private String debugMessage;
-	  // private List<ApiSubError> subErrors;
+	 
 
-	   private APIErrors() {
-	       timestamp = LocalDateTime.now();
+	  public APIErrors() {
+	      // timestamp = LocalDateTime.now();
+		  super();
 	   }
 
 	   APIErrors(HttpStatus status) {
@@ -36,6 +37,9 @@ public class APIErrors {
 	       this.status = status;
 	       this.message = message;
 	       this.debugMessage = ex.getLocalizedMessage();
+	   }
+	   APIErrors(final String message){
+		   super(message);
 	   }
 	
 }
