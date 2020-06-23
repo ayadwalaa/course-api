@@ -8,6 +8,7 @@ public class CourseAPIApp {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CourseAPIApp.class, args);
+		// This static method starts the server (Tomcat), sets up the configuration and scans the class path
 
 	}
 

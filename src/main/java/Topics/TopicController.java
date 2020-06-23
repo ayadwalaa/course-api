@@ -1,5 +1,8 @@
 package Topics;
 
+// This class is to know what would the URL include, and what will happen when an exact URL is requested
+// Methods implemented in this class, are all about request mapping
+
 import java.util.List;
 
 import java.util.Arrays;
@@ -12,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
+
 public class TopicController {
-	
+	// To declare the dependency
 	@Autowired
 	private TopicService topicservice; 
 	

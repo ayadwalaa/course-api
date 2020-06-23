@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CourseController {
 	@Autowired
-	private CourseService courseService; // to inject this, declare dependencies using autowired
+	private CourseService courseService; // to inject this, declare dependencies using auto wired
 	
 	@RequestMapping("/topics/{id}/courses")
 	public List <Course> getAllCoursesModified(@PathVariable String id) {

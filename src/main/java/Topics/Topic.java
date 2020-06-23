@@ -1,23 +1,23 @@
 package Topics;
 
 import javax.persistence.Entity;
+// configuring the relations
 import javax.persistence.Id;
 @Entity
 public class Topic {
-
+	//primary key
 	@Id
-	
 	private String id; 
 	private String name;
 	private String description;
 	
 	public Topic() {}
 	
-	public Topic(String id, String name, String de) {
+	public Topic(String id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.description = de;
+		this.description = description;
 	}
 	
 	

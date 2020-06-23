@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Course {
 
+	
+	// In order to use the course's ID as the primary key in the relational database, we use the primary key as a notation
 	@Id
 	private String id; 
 	private String name;
