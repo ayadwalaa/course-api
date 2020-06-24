@@ -1,13 +1,11 @@
-package services;
+package springbootquickstarter.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import entities.Topic;
-import repositories.TopicRepository;
+import springbootquickstarter.entities.Topic;
+import springbootquickstarter.repositories.TopicRepository;
 
 
 @Service
@@ -23,16 +21,16 @@ public List <Topic> getAllTopics(){
 	.forEach(topics::add);
 	return topics;
 }
-public Topic getTopic(String id) {
+public Topic getTopic(Long id) {
 	 return topicRepository.findOne(id);
 }
 public void addTopic(Topic topic) {
 	topicRepository.save(topic);	
 }
-public void updateTopic(String id, Topic topic) {
+public void updateTopic(Long id, Topic topic) {
 	topicRepository.save(topic);
 }
-public void deleteTopic(String id, Topic topic) {
+public void deleteTopic(Long id, Topic topic) {
 	topicRepository.delete(id);
 	
 }

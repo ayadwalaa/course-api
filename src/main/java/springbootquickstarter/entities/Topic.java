@@ -1,19 +1,30 @@
-package entities;
+package springbootquickstarter.entities;
+import springbootquickstarter.CourseAPIApp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 // configuring the relations
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
+@Table (name ="topics_tbl")
 public class Topic {
 	//primary key
 	@Id
-	private String id; 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column (name="topicId")
+	private Long id;
+	@Column (name ="topicName")
 	private String name;
+	@Column (name= "topicDescription")
 	private String description;
 	
 	public Topic() {}
 	
-	public Topic(String id, String name, String description) {
+	public Topic(Long id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -22,11 +33,11 @@ public class Topic {
 	
 	
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
