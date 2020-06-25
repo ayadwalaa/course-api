@@ -9,4 +9,3 @@ public interface CourseRepository extends CrudRepository <Course, Long>{
 	public List <Course> findByTopicId(Long topicId);
 	
 }
-

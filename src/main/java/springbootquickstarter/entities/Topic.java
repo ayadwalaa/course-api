@@ -1,18 +1,27 @@
 package springbootquickstarter.entities;
 import springbootquickstarter.CourseAPIApp;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 // configuring the relations
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name ="topics_tbl")
-public class Topic {
+public class Topic{
 	//primary key
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name="topicId")
@@ -21,6 +30,9 @@ public class Topic {
 	private String name;
 	@Column (name= "topicDescription")
 	private String description;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToMany (mappedBy = "topic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Course> courses;
 	
 	public Topic() {}
 	

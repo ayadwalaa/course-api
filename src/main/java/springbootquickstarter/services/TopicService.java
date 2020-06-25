@@ -2,6 +2,8 @@ package springbootquickstarter.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springbootquickstarter.entities.Topic;
@@ -30,7 +32,8 @@ public void addTopic(Topic topic) {
 public void updateTopic(Long id, Topic topic) {
 	topicRepository.save(topic);
 }
-public void deleteTopic(Long id, Topic topic) {
+
+public void deleteTopic(Long id) {
 	topicRepository.delete(id);
 	
 }

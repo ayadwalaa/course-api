@@ -10,27 +10,27 @@ import springbootquickstarter.repositories.CourseRepository;
 @Service
 public class CourseService {
 	@Autowired
-	private CourseRepository topicRepository;
+	private CourseRepository courseRepository;
 	
 
 public List <Course> getAllCourses(Long topicId){
 	//return topics;
 	List <Course> topics= new ArrayList<>();
-	topicRepository.findByTopicId(topicId)
+	courseRepository.findByTopicId(topicId)
 	.forEach(topics::add);
 	return topics;
 }
 public Course getCourse(Long id) {
-	 return topicRepository.findOne(id);
+	 return courseRepository.findOne(id);
 }
 public void addCourse(Course topic) {
-	topicRepository.save(topic);	
+	courseRepository.save(topic);	
 }
 public void updateCourse(Course topic) {
-	topicRepository.save(topic);
+	courseRepository.save(topic);
 }
-public void deleteCourse(Long id, Course topic) {
-	topicRepository.delete(id);
+public void deleteCourse(Long id) {
+	courseRepository.delete(id);
 	
 }
 }
