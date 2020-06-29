@@ -1,6 +1,7 @@
 package springbootquickstarter.entities;
 
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,14 +11,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "courses_tbl")
 public class Course {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name="courseId")
@@ -31,15 +36,14 @@ public class Course {
 	@JoinColumn (name = "topicId", nullable=false)
 	private Topic topic;
 	
-
-	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Long topicId, String string, String string2) {
-	this.topic = new Topic(topicId, string, string2);
-	}
-
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonBackReference
+	@ManyToMany (mappedBy="courses", targetEntity= Student.class, cascade = CascadeType.PERSIST)	
+	@Column (name = "studentsCourses")
+	private Set <Student> students = new HashSet<>();
+	
+	
+	
 	public Course() {}
 	
 	public Course(Long id, String name, String de, Long topicId) {
@@ -50,8 +54,12 @@ public class Course {
 		this.topic= new Topic(topicId, "","");
 	}
 	
-	
-
+	public Course(Long id, String name){
+		super();
+		this.id = id;
+	      this.name = name;
+	    
+	    }
 	public Long getId() {
 		return id;
 	}
@@ -75,4 +83,22 @@ public class Course {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Long topicId, String string, String string2) {
+	this.topic = new Topic(topicId, string, string2);
+	}
+
+	public Set<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+
+	
 }

@@ -1,12 +1,7 @@
 package springbootquickstarter.controllers;
 
 import java.util.List;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,18 +17,13 @@ import springbootquickstarter.services.CourseService;
 //in spring business services are similar to singleton 
 @RestController
 public class CourseController {
-	/*
-	 * @Autowired private CourseService courseService; // to inject this, declare
-	 * dependencies using auto wired
-	 */
-
 	@Autowired
 	CourseService courseService;
 	@Autowired
 	CourseRepository courserepo;
 	@Autowired
 	TopicRepository topicrepo;
-	
+
 	@RequestMapping("/topics/{id}/courses")
 	public List <Course> getAllCoursesModified(@PathVariable Long id) {
 		
@@ -61,6 +51,7 @@ public class CourseController {
 	}
 	@PutMapping("/courses/{topicId}")
 	public void addCourseModified(@RequestBody Course course, @PathVariable Long topicId) {
+
 		 if(!topicrepo.exists(topicId)) {
 			   throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
 			   } 
@@ -82,4 +73,14 @@ public class CourseController {
 			   } 
 		courseService.deleteCourse(id);	
 	}
+
+	
+	/*
+	 * @GetMapping(value=" /topics/{topicId}/courses/{id}/students") public Set
+	 * <Student> getStudentsSubscribedToCourse(@PathVariable Long courseId) { return
+	 * courseService.getAllStudents(courseId);
+	 * 
+	 * }
+	 */
+	 
 }
