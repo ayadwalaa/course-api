@@ -3,11 +3,19 @@ package springbootquickstarter.entities;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Table (name= "student_tbl")
 public class Student {
+	
+	@Column(name="idNumber", nullable=false, unique=true, length=12)
+	@NotNull(message = "ID Number Should not be Null.")
+	//@Digits(integer=12, fraction=0, message="Invalid ID Number")
+	private Long idNumber;
+	
 	@Column (name= "studentName", nullable= false)
 	private String name; 
 	
@@ -60,10 +68,19 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Long getIdNumber() {
+		return idNumber;
+	}
+
+	public void setIdNumber(Long idNumber) {
+		this.idNumber = idNumber;
+	}
 
 	public Set <Course> getCourses() {
 		return courses;
 	}
+
 
 	@SuppressWarnings("unchecked")
 	public void setCourses(Long courseId, String string1, String string2, Long topicId) {
