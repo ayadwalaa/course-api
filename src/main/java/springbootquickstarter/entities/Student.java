@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
@@ -11,9 +13,8 @@ import javax.validation.constraints.NotNull;
 @Table (name= "student_tbl")
 public class Student {
 	
-	@Column(name="idNumber", nullable=false, unique=true, length=12)
+	@Column(name="idNumber", nullable=false, unique=true)
 	@NotNull(message = "ID Number Should not be Null.")
-	//@Digits(integer=12, fraction=0, message="Invalid ID Number")
 	private Long idNumber;
 	
 	@Column (name= "studentName", nullable= false)
