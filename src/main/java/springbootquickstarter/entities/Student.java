@@ -3,9 +3,6 @@ package springbootquickstarter.entities;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
