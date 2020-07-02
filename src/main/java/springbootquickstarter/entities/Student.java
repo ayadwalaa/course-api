@@ -5,16 +5,19 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 @Table (name= "student_tbl")
 public class Student {
 	
-	@Column(name="idNumber", nullable=false, unique=true)
-	@NotNull(message = "ID Number Should not be Null.")
+	@NotNull
+	@Column(name="idNumber", unique=true)
 	private Long idNumber;
-	
+	//@Size ()
 	@Column (name= "studentName", nullable= false)
+	@NotEmpty( message =" Student Name must not be empty.")
 	private String name; 
 	
 	

@@ -4,11 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import springbootquickstarter.entities.*;
 
 @Entity
 public class StudentDTO  {
+	@NotNull
 	private String name;
+	@NotNull
+	@Size (min =10, max = 12)
 	private Long idNumber;
 	private Set <Course> courses = new HashSet<>();
 	

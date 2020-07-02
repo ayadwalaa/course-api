@@ -1,7 +1,6 @@
 package springbootquickstarter.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,7 +25,7 @@ public class Course {
 	@JsonBackReference
 	@ManyToMany (mappedBy="courses", targetEntity= Student.class, cascade = CascadeType.PERSIST)	
 	@Column (name = "studentsCourses")
-	private Set <Student> students = new HashSet<>();
+	private List  <Student> students ;
 	
 	
 	
@@ -78,11 +77,11 @@ public class Course {
 	this.topic = new Topic(topicId, string, string2);
 	}
 
-	public Set<Student> getStudents() {
+	public List <Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(Set<Student> students) {
+	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
 

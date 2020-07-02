@@ -1,16 +1,26 @@
 package springbootquickstarter.controllers;
 
 import java.util.List;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import DTOs.*;
+import ExceptionsHandling.StudentNotFoundException;
+import ExceptionsHandling.TypeMismatchException;
 import springbootquickstarter.entities.*;
 import springbootquickstarter.services.*;
 import springbootquickstarter.repositories.StudentRepository;
 
 @RestController
+@Validated
+
 public class StudentController {
 	@Autowired
 	StudentRepository studentRepo;
@@ -21,67 +31,26 @@ public class StudentController {
 	
 	@GetMapping("/students")
 	public List <StudentDTO> getAllStudents(){
-		List <Student> allStudents = studentRepo.findAll();
-		if (allStudents.size()==0) {
-			return null;
-		}
-		return converter.entityToDto(allStudents);
-		
+		return studentService.getStudents();
 	}
-	
-	
+
 	  @GetMapping("/students/{id}") 
-	  public ResponseEntity<StudentDTO> getStudent(@PathVariable(value = "id") Long id) { 
-		  if (studentRepo.exists(id)) {
-			  Student student = studentRepo.findOne(id);
-			  return ResponseEntity.ok(converter.entityToDto(student));
-		  }
-		 return new ResponseEntity<> (HttpStatus.NOT_FOUND);
-	  
+   public ResponseEntity<StudentDTO> getStudent( @PathVariable(value = "id")  @Valid @Min(10) @Max(1000) Long id) throws StudentNotFoundException, ConstraintViolationException, TypeMismatchException { 
+		  return studentService.getStudent(id);
 	  }
 	  
-	
-	  @PostMapping("/students") 
-	  public ResponseEntity<StudentDTO> addStudent(@RequestBody Student studentt) {
-		  if (studentRepo.exists(studentt.getId())) {
-			  return new ResponseEntity<> (HttpStatus.ALREADY_REPORTED);
-		  }
-		  else {
-			  
-		if (studentt.getIdNumber().SIZE > 12 || studentt.getIdNumber().SIZE < 10) {
-			return new ResponseEntity<>(HttpStatus.LENGTH_REQUIRED);
-		}
-		else {
-		 studentRepo.save(studentt); 
-		 return ResponseEntity.ok(converter.entityToDto(studentt));
-		}
-		
-		  }
+	  @PostMapping("/students")
+   public ResponseEntity<StudentDTO> addStudent(@RequestBody Student studentt) throws Exception {
+		return studentService.addStudent(studentt);
 	  }
-	  
-	@PutMapping ("/students/{studentid}") 
-	public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO dto, @PathVariable Long studentid) { 
-		
-		if (studentRepo.exists(studentid)) {
-			Student student = converter.dtoToEntity(dto);
-		    studentRepo.save(student);
-		    ResponseEntity.ok(converter.entityToDto(student));
-		}
-		
-			 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		 
+   @PutMapping("/students/{studentid}")
+   public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO dto, @PathVariable Long studentid) throws StudentNotFoundException{ 
+		return studentService.editStudent(dto, studentid);
 		    } 
-		 
-	 
-	  
-	
-	  @DeleteMapping("/students/{studentid}") 
-	  public ResponseEntity<Void> deleteStudent(@PathVariable Long studentid) {
-		  if (studentRepo.exists(studentid)) {
-			  studentService.deleteStudent(studentid);
-			  return ResponseEntity.noContent().build();
-		  }
-			 return ResponseEntity.notFound().build();
+
+	@DeleteMapping("/students/{studentid}") 
+	  public ResponseEntity<Void> deleteStudent(@PathVariable Long studentid) throws StudentNotFoundException {
+		  return studentService.deleteStudent(studentid);
 		 
 	  }
 	 

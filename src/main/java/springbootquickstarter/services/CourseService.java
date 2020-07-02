@@ -3,8 +3,11 @@ package springbootquickstarter.services;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ExceptionsHandling.CourseDoesNotExist;
 import springbootquickstarter.entities.Course;
+import springbootquickstarter.entities.Student;
 import springbootquickstarter.repositories.CourseRepository;
 
 @Service
@@ -20,17 +23,35 @@ public List <Course> getAllCourses(Long topicId){
 	.forEach(topics::add);
 	return topics;
 }
-public Course getCourse(Long id) {
-	 return courseRepository.findOne(id);
+public ResponseEntity<Course> getCourse(Long id) throws CourseDoesNotExist {
+	 return ResponseEntity.ok(findCourse(id));
 }
-public void addCourse(Course topic) {
-	courseRepository.save(topic);	
+public ResponseEntity<Course> addCourse(Course course) {
+	return ResponseEntity.ok(courseRepository.save(course));	
 }
-public void updateCourse(Course topic) {
-	courseRepository.save(topic);
+public ResponseEntity<Course> updateCourse(Course course) throws CourseDoesNotExist {
+	return ResponseEntity.ok(courseRepository.save(findCourse(course.getId())));
 }
-public void deleteCourse(Long id) {
-	courseRepository.delete(id);
-	
+public ResponseEntity<Void> deleteCourse(Long id) throws CourseDoesNotExist {
+	courseRepository.delete(findCourse(id).getId());
+	return ResponseEntity.ok().build();	
 }
+public List <Student> getCourseStudents(Long id) throws CourseDoesNotExist {
+ return findCourse(id).getStudents();
+}
+public void addStudentToCourse(Long courseid, List<Student> students) throws CourseDoesNotExist {
+	Course c = findCourse(courseid);
+	c.setStudents(students);
+	courseRepository.save(c);
+}
+
+public Course findCourse(Long id) throws CourseDoesNotExist {
+	Course course = courseRepository.findOne(id);
+	if (course != null) {
+		return course;
+	}
+	throw new CourseDoesNotExist("Course of id = " + id + " does not exist.");
+}
+
+
 }

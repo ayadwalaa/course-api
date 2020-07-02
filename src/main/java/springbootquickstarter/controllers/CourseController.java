@@ -2,14 +2,18 @@ package springbootquickstarter.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ExceptionsHandling.CourseDoesNotExist;
 import springbootquickstarter.entities.Course;
+import springbootquickstarter.entities.Student;
 import springbootquickstarter.repositories.CourseRepository;
 import springbootquickstarter.repositories.TopicRepository;
 import springbootquickstarter.services.CourseService;
@@ -34,10 +38,7 @@ public class CourseController {
 	}
 	
 	@RequestMapping("/topics/{topicId}/courses/{id}")
-	public Course getCourse(@PathVariable Long id) {
-		 if(!courserepo.exists(id)) {
-			   throw new RuntimeException("Course does not exist. Please recheck the ID provided.");
-			   } 
+	public ResponseEntity<Course> getCourse(@PathVariable Long id) throws CourseDoesNotExist {
 		return courseService.getCourse(id);
 	}
 	
@@ -50,37 +51,29 @@ public class CourseController {
 		courseService.addCourse(course);
 	}
 	@PutMapping("/courses/{topicId}")
-	public void addCourseModified(@RequestBody Course course, @PathVariable Long topicId) {
-
-		 if(!topicrepo.exists(topicId)) {
-			   throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
-			   } 
+	public ResponseEntity<Course> addCourseModified(@RequestBody Course course, @PathVariable Long topicId) {
 		course.setTopic(topicId,"Course number " + topicId,"");
-		courseService.addCourse(course);
+		return courseService.addCourse(course);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/topics/{topicId}/courses/{id}")
-	public void updateCourse(@RequestBody Course course, @PathVariable Long id, @PathVariable Long topicId) {
-		
+	public ResponseEntity<Course> updateCourse(@RequestBody Course course, @PathVariable Long id, @PathVariable Long topicId) throws CourseDoesNotExist {
 		course.setTopic(topicId, "Test number" + topicId, "");
-		courseService.updateCourse(course);
-		
+		return courseService.updateCourse(course);	
 	}
 	@RequestMapping(method=RequestMethod.DELETE, value="/topics/{topicId}/courses/{id}")
-	public void deleteCourse(@PathVariable Long id) {
-		 if(!courserepo.exists(id)) {
-			   throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
-			   } 
-		courseService.deleteCourse(id);	
+	public ResponseEntity<Void> deleteCourse(@PathVariable Long id) throws CourseDoesNotExist {
+		return courseService.deleteCourse(id);	
 	}
 
 	
-	/*
-	 * @GetMapping(value=" /topics/{topicId}/courses/{id}/students") public Set
-	 * <Student> getStudentsSubscribedToCourse(@PathVariable Long courseId) { return
-	 * courseService.getAllStudents(courseId);
-	 * 
-	 * }
-	 */
-	 
+	@RequestMapping("/courses/{id}/students")
+	public List <Student> getCourseStudents(@PathVariable Long id) throws CourseDoesNotExist {
+		return courseService.getCourseStudents(id);
+	}
+	
+	@PostMapping ("courses/{courseid}/students")
+	public void addStudentsToCourse(@PathVariable Long courseid, @RequestBody List<Student> students) throws CourseDoesNotExist {
+		 courseService.addStudentToCourse(courseid, students);
+	}
 }
