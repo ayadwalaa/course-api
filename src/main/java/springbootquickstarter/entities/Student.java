@@ -15,7 +15,6 @@ public class Student {
 	@NotNull
 	@Column(name="idNumber", unique=true)
 	private Long idNumber;
-	//@Size ()
 	@Column (name= "studentName", nullable= false)
 	@NotEmpty( message =" Student Name must not be empty.")
 	private String name; 
@@ -26,8 +25,6 @@ public class Student {
 	@Column (name="studentId")
 	private Long id;
 	
-	
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, targetEntity= Course.class)
 	@JoinTable(name = "students_courses",
     joinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "studentId",

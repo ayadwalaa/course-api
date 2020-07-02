@@ -15,7 +15,6 @@ import springbootquickstarter.services.TopicService;
 
 @RestController
 public class TopicController {
-	// To declare the dependency
 	@Autowired
 	private TopicService topicservice; 
 	@Autowired

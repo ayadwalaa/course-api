@@ -17,7 +17,6 @@ public class CourseService {
 	
 
 public List <Course> getAllCourses(Long topicId){
-	//return topics;
 	List <Course> topics= new ArrayList<>();
 	courseRepository.findByTopicId(topicId)
 	.forEach(topics::add);
@@ -39,10 +38,10 @@ public ResponseEntity<Void> deleteCourse(Long id) throws CourseDoesNotExist {
 public List <Student> getCourseStudents(Long id) throws CourseDoesNotExist {
  return findCourse(id).getStudents();
 }
-public void addStudentToCourse(Long courseid, List<Student> students) throws CourseDoesNotExist {
+public ResponseEntity<Course> addStudentToCourse(Long courseid, Student students) throws CourseDoesNotExist {
 	Course c = findCourse(courseid);
 	c.setStudents(students);
-	courseRepository.save(c);
+	return ResponseEntity.ok(courseRepository.save(c));
 }
 
 public Course findCourse(Long id) throws CourseDoesNotExist {

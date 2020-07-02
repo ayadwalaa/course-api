@@ -21,7 +21,7 @@ public class Course {
 	@JoinColumn (name = "topicId", nullable=false)
 	private Topic topic;
 	
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 	@JsonBackReference
 	@ManyToMany (mappedBy="courses", targetEntity= Student.class, cascade = CascadeType.PERSIST)	
 	@Column (name = "studentsCourses")
@@ -81,8 +81,8 @@ public class Course {
 		return students;
 	}
 
-	public void setStudents(List<Student> students) {
-		this.students = students;
+	public void setStudents(Student student) {
+		this.students.add(student);
 	}
 
 	

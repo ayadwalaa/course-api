@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ReplicatedStudentException extends Exception {
 
 	public ReplicatedStudentException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
+		super(message);}
 	
 
 }

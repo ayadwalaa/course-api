@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import DTOs.StudentDTO;
 import springbootquickstarter.entities.Student;
-//import springbootquickstarter.entities.StudentNotFoundException;
 import springbootquickstarter.repositories.CourseRepository;
 import springbootquickstarter.repositories.StudentRepository;
 import springbootquickstarter.controllers.*;

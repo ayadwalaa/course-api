@@ -17,8 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table (name ="topics_tbl")
 public class Topic{
-	//primary key
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name="topicId")

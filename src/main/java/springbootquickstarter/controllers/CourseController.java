@@ -73,7 +73,7 @@ public class CourseController {
 	}
 	
 	@PostMapping ("courses/{courseid}/students")
-	public void addStudentsToCourse(@PathVariable Long courseid, @RequestBody List<Student> students) throws CourseDoesNotExist {
-		 courseService.addStudentToCourse(courseid, students);
+	public ResponseEntity<Course> addStudentsToCourse(@PathVariable Long courseid, @RequestBody Student students) throws CourseDoesNotExist {
+		 return courseService.addStudentToCourse(courseid, students);
 	}
 }

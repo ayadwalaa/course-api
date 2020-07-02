@@ -8,7 +8,7 @@ public class CourseDoesNotExist extends Exception {
 
 	public CourseDoesNotExist(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 
