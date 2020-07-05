@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import DTOs.StudentConverter;
 import DTOs.StudentDTO;
 import springbootquickstarter.entities.Student;
 import springbootquickstarter.repositories.CourseRepository;

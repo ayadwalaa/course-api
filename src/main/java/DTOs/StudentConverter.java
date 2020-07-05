@@ -1,10 +1,9 @@
-package springbootquickstarter.controllers;
+package DTOs;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
-import DTOs.StudentDTO;
 import springbootquickstarter.entities.Student;
 
 @Component
