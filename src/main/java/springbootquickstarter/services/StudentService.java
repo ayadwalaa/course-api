@@ -25,7 +25,6 @@ public class StudentService {
 	CourseRepository courseRepo;
 	@Autowired
 	StudentConverter converter;
-	
 
 	public List<StudentDTO> getStudents() { 
 		List<Student> allStudents = studentRepo.findAll();

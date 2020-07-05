@@ -12,8 +12,6 @@ import springbootquickstarter.repositories.TopicRepository;
 public class TopicService {
 	@Autowired
 	private TopicRepository topicRepository;
-	
-
 public List <Topic> getAllTopics(){
 	List <Topic> topics= new ArrayList<>();
 	topicRepository.findAll()
@@ -32,6 +30,5 @@ public void updateTopic(Long id, Topic topic) {
 
 public void deleteTopic(Long id) {
 	topicRepository.delete(id);
-	
 }
 }

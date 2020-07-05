@@ -7,5 +7,6 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends CrudRepository <Course, Long>{
 	public List <Course> findByTopicId(Long topicId);
+	//comment
 	
 }
