@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ExceptionsHandling.CourseDoesNotExist;
+import exceptionshandling.CourseDoesNotExist;
 import springbootquickstarter.entities.Course;
 import springbootquickstarter.entities.Student;
 import springbootquickstarter.repositories.CourseRepository;

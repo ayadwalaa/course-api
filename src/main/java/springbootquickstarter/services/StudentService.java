@@ -1,7 +1,4 @@
 package springbootquickstarter.services;
-import ExceptionsHandling.*;
-
-
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.ConstraintViolationException;
@@ -11,12 +8,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import DTOs.StudentConverter;
-import DTOs.StudentDTO;
+import exceptionshandling.*;
 import springbootquickstarter.entities.Student;
 import springbootquickstarter.repositories.CourseRepository;
 import springbootquickstarter.repositories.StudentRepository;
 import springbootquickstarter.controllers.*;
+import springbootquickstarter.dtos.StudentConverter;
+import springbootquickstarter.dtos.StudentDTO;
 
 @Service
 public class StudentService {

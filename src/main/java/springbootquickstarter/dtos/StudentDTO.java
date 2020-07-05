@@ -1,4 +1,4 @@
-package DTOs;
+package springbootquickstarter.dtos;
 
 import java.util.HashSet;
 import java.util.Set;

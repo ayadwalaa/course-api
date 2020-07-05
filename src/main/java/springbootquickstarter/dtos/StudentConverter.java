@@ -1,4 +1,4 @@
-package DTOs;
+package springbootquickstarter.dtos;
 
 import java.util.List;
 import java.util.stream.Collectors;
