@@ -6,45 +6,44 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table (name = "courses_tbl")
+@Table(name = "courses_tbl")
 public class Course {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column (name="courseId")
-	private Long id; 
-	@Column (name= "courseName")
+	@Column(name = "courseId")
+	private Long id;
+	@Column(name = "courseName")
 	private String name;
-	@Column (name="courseDescription")
+	@Column(name = "courseDescription")
 	private String description;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne (fetch = FetchType.LAZY, optional = false)
-	@JoinColumn (name = "topicId", nullable=false)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "topicId", nullable = false)
 	private Topic topic;
-	
 
 	@JsonBackReference
-	@ManyToMany (mappedBy="courses", targetEntity= Student.class, cascade = CascadeType.PERSIST)	
-	@Column (name = "studentsCourses")
-	private List  <Student> students ;
-	
-	
-	
-	public Course() {}
-	
+	@ManyToMany(mappedBy = "courses", targetEntity = Student.class, cascade = CascadeType.PERSIST)
+	@Column(name = "studentsCourses")
+	private List<Student> students;
+
+	public Course() {
+	}
+
 	public Course(Long id, String name, String de, Long topicId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = de;
-		this.topic= new Topic(topicId, "","");
+		this.topic = new Topic(topicId, "", "");
 	}
-	
-	public Course(Long id, String name){
+
+	public Course(Long id, String name) {
 		super();
 		this.id = id;
-	      this.name = name;
-	    
-	    }
+		this.name = name;
+
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -74,10 +73,10 @@ public class Course {
 	}
 
 	public void setTopic(Long topicId, String string, String string2) {
-	this.topic = new Topic(topicId, string, string2);
+		this.topic = new Topic(topicId, string, string2);
 	}
 
-	public List <Student> getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
@@ -85,5 +84,4 @@ public class Course {
 		this.students.add(student);
 	}
 
-	
 }
