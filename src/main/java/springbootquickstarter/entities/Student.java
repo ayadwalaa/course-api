@@ -77,8 +77,8 @@ public class Student {
 
 	@SuppressWarnings("unchecked")
 	public void setCourses(Long courseId, String string1, String string2, Long topicId) {
-		Set<Course> course = (Set<Course>) new Course(courseId, string1, string2, topicId);
-		this.courses = course;
+		Course course =  new Course(courseId, string1, string2, topicId);
+		this.courses.add(course);
 	}
 
 	public void setCourses(Set<Course> courses2) {

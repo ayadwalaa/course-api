@@ -9,8 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import exceptionshandling.*;
 import springbootquickstarter.entities.Student;
+import springbootquickstarter.exceptionshandling.StudentNotFoundException;
+import springbootquickstarter.exceptionshandling.TypeMismatchException;
 import springbootquickstarter.repositories.CourseRepository;
 import springbootquickstarter.repositories.StudentRepository;
 import springbootquickstarter.dtos.StudentConverter;
@@ -27,7 +28,7 @@ public class StudentService {
 
 	public List<StudentDTO> getStudents() {
 		List<Student> allStudents = studentRepo.findAll();
-		if (allStudents.size() == 0) {
+		if (allStudents.isEmpty()) {
 			throw new EntityNotFoundException();
 		}
 		return converter.entityToDto(allStudents);

@@ -1,4 +1,4 @@
-package exceptionshandling;
+package springbootquickstarter.exceptionshandling;
 
 import java.util.List;
 

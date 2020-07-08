@@ -1,16 +1,19 @@
 package springbootquickstarter.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import exceptionshandling.CourseDoesNotExist;
 import springbootquickstarter.entities.Course;
 import springbootquickstarter.entities.Student;
+import springbootquickstarter.exceptionshandling.CourseDoesNotExist;
 import springbootquickstarter.repositories.CourseRepository;
 
 @Service
@@ -41,7 +44,7 @@ public class CourseService {
 		return ResponseEntity.ok().build();
 	}
 
-	public List<Student> getCourseStudents(Long id) throws CourseDoesNotExist {
+	public Set<Student>getCourseStudents(Long id) throws CourseDoesNotExist {
 		return findCourse(id).getStudents();
 	}
 
@@ -59,8 +62,8 @@ public class CourseService {
 		throw new CourseDoesNotExist("Course of id = " + id + " does not exist.");
 	}
 
-	public List<Student> getCoursesStudents(Map<String, String> my_map) throws CourseDoesNotExist {
-		List<Student> students = new ArrayList<>();
+	public Set<Student> getCoursesStudents(Map<String, String> my_map) throws CourseDoesNotExist {
+		Set<Student> students = new HashSet <> ();
 		for (int i = 1; i <= my_map.size(); i++) {
 			Long id1 = Long.valueOf(my_map.get("course_id" + i));
 			students.addAll(getCourseStudents(id1));

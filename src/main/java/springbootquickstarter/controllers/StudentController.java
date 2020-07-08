@@ -12,11 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import exceptionshandling.StudentNotFoundException;
-import exceptionshandling.TypeMismatchException;
 import springbootquickstarter.dtos.StudentConverter;
 import springbootquickstarter.dtos.StudentDTO;
 import springbootquickstarter.entities.*;
+import springbootquickstarter.exceptionshandling.StudentNotFoundException;
+import springbootquickstarter.exceptionshandling.TypeMismatchException;
 import springbootquickstarter.services.*;
 import springbootquickstarter.repositories.StudentRepository;
 

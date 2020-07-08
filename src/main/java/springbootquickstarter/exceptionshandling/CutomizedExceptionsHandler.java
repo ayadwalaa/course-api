@@ -1,4 +1,4 @@
-package exceptionshandling;
+package springbootquickstarter.exceptionshandling;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import exceptionshandling.StudentNotFoundException;
 
 @SuppressWarnings({"unchecked","rawtypes"})
 @ControllerAdvice

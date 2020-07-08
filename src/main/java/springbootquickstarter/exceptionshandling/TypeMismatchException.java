@@ -1,4 +1,4 @@
-package exceptionshandling;
+package springbootquickstarter.exceptionshandling;
 
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
