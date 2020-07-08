@@ -16,48 +16,49 @@ import springbootquickstarter.services.TopicService;
 @RestController
 public class TopicController {
 	@Autowired
-	private TopicService topicservice; 
+	private TopicService topicservice;
 	@Autowired
 	private TopicRepository topicreop;
-	
+
 	@RequestMapping("/topics")
-	public List <Topic> AllTopics() {
-		
-		  if(topicservice.getAllTopics().isEmpty()) {
-			  throw new RuntimeException("There are no topics. "); 
-			  }
-		return topicservice.getAllTopics() ;	
-	}
-	
-	@RequestMapping("/topics/{id}")
-	public Topic getTopic(@PathVariable Long id)  {
-		
-		 if(!topicreop.exists(id)) { 
-			 throw new RuntimeException("Topic does not exist. Please recheck the ID provided."); 
-			 }
-		 
-	return topicservice.getTopic(id);
-	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/topics")
-	public void addTopic(@RequestBody Topic topic)  {
-			topicservice.addTopic(topic);
+	public List<Topic> AllTopics() {
+
+		if (topicservice.getAllTopics().isEmpty()) {
+			throw new RuntimeException("There are no topics. ");
 		}
-	@RequestMapping(method=RequestMethod.PUT, value="/topics/{id}")
-	public void updateTopic(@RequestBody Topic topic, @PathVariable Long id) {
-		
-		  if(!topicreop.exists(id)) { 
-			  throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
-			  }
-			topicservice.updateTopic(id,topic);	
+		return topicservice.getAllTopics();
 	}
 
-	@RequestMapping(method=RequestMethod.DELETE, value="/topics/{id}")
+	@RequestMapping("/topics/{id}")
+	public Topic getTopic(@PathVariable Long id) {
+
+		if (!topicreop.exists(id)) {
+			throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
+		}
+
+		return topicservice.getTopic(id);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/topics")
+	public void addTopic(@RequestBody Topic topic) {
+		topicservice.addTopic(topic);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/topics/{id}")
+	public void updateTopic(@RequestBody Topic topic, @PathVariable Long id) {
+
+		if (!topicreop.exists(id)) {
+			throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
+		}
+		topicservice.updateTopic(id, topic);
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/topics/{id}")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	public void deleteTopic(@PathVariable Long id) {
-		  if(!topicreop.exists(id)) { 
-			  throw new RuntimeException("Topic does not exist. Please recheck the ID provided."); 
-			  }
-		topicservice.deleteTopic(id);	
+		if (!topicreop.exists(id)) {
+			throw new RuntimeException("Topic does not exist. Please recheck the ID provided.");
+		}
+		topicservice.deleteTopic(id);
 	}
 }

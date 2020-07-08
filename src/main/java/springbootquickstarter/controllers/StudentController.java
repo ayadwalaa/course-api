@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import DTOs.*;
-import ExceptionsHandling.StudentNotFoundException;
-import ExceptionsHandling.TypeMismatchException;
+
+import springbootquickstarter.dtos.StudentConverter;
+import springbootquickstarter.dtos.StudentDTO;
 import springbootquickstarter.entities.*;
+import springbootquickstarter.exceptionshandling.StudentNotFoundException;
+import springbootquickstarter.exceptionshandling.TypeMismatchException;
 import springbootquickstarter.services.*;
 import springbootquickstarter.repositories.StudentRepository;
 
@@ -26,32 +28,35 @@ public class StudentController {
 	StudentRepository studentRepo;
 	@Autowired
 	StudentService studentService;
-	@Autowired 
+	@Autowired
 	StudentConverter converter;
-	
+
 	@GetMapping("/students")
-	public List <StudentDTO> getAllStudents(){
+	public List<StudentDTO> getAllStudents() {
 		return studentService.getStudents();
 	}
 
-	  @GetMapping("/students/{id}") 
-   public ResponseEntity<StudentDTO> getStudent( @PathVariable(value = "id")  @Valid @Min(10) @Max(1000) Long id) throws StudentNotFoundException, ConstraintViolationException, TypeMismatchException { 
-		  return studentService.getStudent(id);
-	  }
-	  
-	  @PostMapping("/students")
-   public ResponseEntity<StudentDTO> addStudent(@RequestBody Student studentt) throws Exception {
-		return studentService.addStudent(studentt);
-	  }
-   @PutMapping("/students/{studentid}")
-   public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO dto, @PathVariable Long studentid) throws StudentNotFoundException{ 
-		return studentService.editStudent(dto, studentid);
-		    } 
+	@GetMapping("/students/{id}")
+	public ResponseEntity<StudentDTO> getStudent(@PathVariable(value = "id") @Valid @Min(10) @Max(1000) Long id)
+			throws StudentNotFoundException, ConstraintViolationException, TypeMismatchException {
+		return studentService.getStudent(id);
+	}
 
-	@DeleteMapping("/students/{studentid}") 
-	  public ResponseEntity<Void> deleteStudent(@PathVariable Long studentid) throws StudentNotFoundException {
-		  return studentService.deleteStudent(studentid);
-		 
-	  }
+	@PostMapping("/students")
+	public ResponseEntity<StudentDTO> addStudent(@RequestBody Student studentt) throws Exception {
+		return studentService.addStudent(studentt);
+	}
+
+	@PutMapping("/students/{studentid}")
+	public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO dto, @PathVariable Long studentid)
+			throws StudentNotFoundException {
+		return studentService.editStudent(dto, studentid);
+	}
+
+	@DeleteMapping("/students/{studentid}")
+	public ResponseEntity<Void> deleteStudent(@PathVariable Long studentid) throws StudentNotFoundException {
+		return studentService.deleteStudent(studentid);
+
+	}
 
 }

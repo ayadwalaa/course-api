@@ -1,4 +1,4 @@
-package ExceptionsHandling;
+package springbootquickstarter.exceptionshandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -8,7 +8,7 @@ public class StudentNotFoundException extends Exception {
 
 	public StudentNotFoundException(String ex) {
 		super(ex);
-		
+
 	}
 
 }

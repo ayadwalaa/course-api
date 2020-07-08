@@ -1,4 +1,4 @@
-package ExceptionsHandling;
+package springbootquickstarter.exceptionshandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ReplicatedStudentException extends Exception {
 
 	public ReplicatedStudentException(String message) {
-		super(message);}
-	
+		super(message);
+	}
 
 }
